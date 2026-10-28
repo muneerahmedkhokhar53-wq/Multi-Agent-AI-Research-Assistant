@@ -45,8 +45,8 @@ The search and reader agents are LangChain agents with one tool each. The writer
 You need Python 3.10 or newer, a model API key, and a free [Tavily](https://tavily.com) key for search.
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/researchmind.git
-cd researchmind
+git clone https://github.com/muneerahmedkhokhar53-wq/Multi-Agent-AI-Research-Assistant.git
+cd Multi-Agent-AI-Research-Assistant
 
 python -m venv .venv
 source .venv/bin/activate        # Windows: .venv\Scripts\activate
@@ -111,6 +111,8 @@ python -m unittest discover -s tests -t . -v
 The same command runs in CI on Python 3.10, 3.11 and 3.12. See [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
 
 ## Limitations
+
+Research outputs are machine-generated and may contain omissions or incorrect interpretations. Verify important claims against the linked source material before using the report for academic, professional, or high-stakes decisions. Search and page-reading coverage depends on external services and page accessibility.
 
 - The reader agent keeps the first 3,000 characters of a page, and each search snippet is cut to 300 characters. Long pages are only partly read.
 - Scanned PDFs have no text layer and are rejected with a message. Run OCR on them first.
