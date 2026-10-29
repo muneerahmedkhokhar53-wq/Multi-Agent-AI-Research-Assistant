@@ -27,18 +27,26 @@ Ask a question and four AI agents take it from there: one searches the web, one 
 
 ## How it works
 
+The workflow diagram below shows the research pipeline and the optional document-only or document-augmented path.
+
 ```mermaid
-flowchart LR
-    Q[Your topic] --> S[Search agent<br/>Tavily web search]
-    S --> R[Reader agent<br/>opens and reads a page]
-    D[Your documents] --> W
-    R --> W[Writer]
-    W --> C[Critic]
-    W --> REP[Report]
-    C --> REV[Score and review]
+flowchart TD
+    U["User enters research topic"] --> UI["Streamlit interface"]
+    UI --> OPT["Research options<br/>style, audience, language, search depth"]
+    OPT --> S["Search agent<br/>Tavily web search"]
+    S --> R["Reader agent<br/>opens and extracts page content"]
+    R --> W["Writer chain<br/>synthesizes sourced report"]
+    DOC["Optional uploaded documents<br/>PDF, DOCX, TXT, MD, CSV"] --> PARSE["Document extraction"]
+    PARSE --> W
+    W --> C["Critic chain<br/>score, strengths, missing points"]
+    W --> REPORT["Report tab<br/>Introduction, findings, conclusion, sources"]
+    C --> REVIEW["Review tab<br/>score and improvement feedback"]
+    S --> SOURCES["Sources tab<br/>links found during research"]
+    REPORT --> OUT["Download report as Markdown"]
+    REVIEW --> OUT
 ```
 
-The search and reader agents are LangChain agents with one tool each. The writer and critic are prompt chains. Each step's output is passed to the next.
+The search and reader agents are LangChain agents with one tool each. The writer and critic are prompt chains. Each step's output is passed to the next. When using uploaded documents without web research, the document text can supply the writer's source material instead.
 
 ## Quick start
 
@@ -49,7 +57,7 @@ git clone https://github.com/muneerahmedkhokhar53-wq/Multi-Agent-AI-Research-Ass
 cd Multi-Agent-AI-Research-Assistant
 
 python -m venv .venv
-source .venv/bin/activate        # Windows: .venv\Scripts\activate
+source .venv/bin/activate        # Windows: .venv\\Scripts\\activate
 python -m pip install -r requirements.txt
 
 cp .env.example .env             # Windows: copy .env.example .env
