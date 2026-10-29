@@ -12,7 +12,7 @@ Ask a question and four AI agents take it from there: one searches the web, one 
 ![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue)
 ![Streamlit](https://img.shields.io/badge/UI-Streamlit-ff4b4b)
 ![License: MIT](https://img.shields.io/badge/license-MIT-green)
-[![CI](https://github.com/YOUR_USERNAME/researchmind/actions/workflows/ci.yml/badge.svg)](https://github.com/YOUR_USERNAME/researchmind/actions/workflows/ci.yml)
+[![CI](https://github.com/muneerahmedkhokhar53-wq/Multi-Agent-AI-Research-Assistant/actions/workflows/ci.yml/badge.svg)](https://github.com/muneerahmedkhokhar53-wq/Multi-Agent-AI-Research-Assistant/actions/workflows/ci.yml)
 
 ## What it does
 
