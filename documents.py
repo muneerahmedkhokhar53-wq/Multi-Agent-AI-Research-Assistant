@@ -101,13 +101,21 @@ def build_material(files: list[tuple[str, bytes]], budget: int = DEFAULT_BUDGET)
     if not texts:
         return "", rows
 
-    share = max(500, budget // len(texts))
+    if not isinstance(budget, int) or isinstance(budget, bool) or budget < 1:
+        raise ValueError("budget must be a positive integer")
+
     parts = []
     by_name = {r["name"]: r for r in rows if "error" not in r}
-    for name, text in texts:
+    remaining = budget
+    for index, (name, text) in enumerate(texts):
+        files_left = len(texts) - index
+        # Recalculate the share after each file so short documents do not waste
+        # the budget, and the total extracted text never exceeds the requested cap.
+        share = remaining // files_left
         used = text[:share]
         row = by_name[name]
         row["used"] = len(used)
         row["truncated"] = len(text) > len(used)
+        remaining -= len(used)
         parts.append(f"DOCUMENT: {name}\n{used}")
     return "\n\n".join(parts), rows
